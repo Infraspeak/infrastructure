@@ -13,9 +13,10 @@ jobs:
         with:
           fetch-depth: 0
       - name: Bump version and push tag
-        uses: anothrNick/github-tag-action@1.26.0
+        uses: mathieudutour/github-tag-action@v4.6
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
+          release_branches: main
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v1
       - name: Set up Docker Buildx
