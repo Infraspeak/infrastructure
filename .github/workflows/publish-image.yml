@@ -18,4 +18,4 @@ jobs:
           repository: alimainfraspeak/dummy-docker
           tag_with_ref: true
           context: .
-            file: ./Dockerfile
+          file: ./Dockerfile
