@@ -10,10 +10,10 @@ jobs:
     steps:
       - name: Check out the repo
         uses: actions/checkout@v2
-      - name: Tag release
-        uses: phish108/autotag-action@1.1.25
+      - name: Bump version and push tag
+        uses: mathieudutour/github-tag-action@v4.6
         with:
-          github-token: ${{ secrets.GITHUB_TOKEN}}
+          github_token: ${{ secrets.GITHUB_TOKEN }}
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v1
       - name: Set up Docker Buildx
@@ -26,7 +26,7 @@ jobs:
       - name: Push to Docker Hub
         uses: docker/build-push-action@v2
         with:
-          tags: alimainfraspeak/dummy-docker:latest
+          tags: alimainfraspeak/test-docker:latest
           push: true
           context: .
           file: ./Dockerfile
