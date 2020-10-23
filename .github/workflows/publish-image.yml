@@ -30,9 +30,9 @@ jobs:
       - name: Push to Docker Hub
         uses: docker/build-push-action@v2
         with:
-          tags:
-            - alimainfraspeak/test-docker:latest
-            - alimainfraspeak/test-docker:${{ steps.tag.new_tag }}
           push: true
           context: .
           file: ./Dockerfile
+          tags: |
+            alimainfraspeak/test-docker:latest
+            alimainfraspeak/test-docker:${{ steps.tag.new_tag }}
