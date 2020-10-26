@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: npm-parser-service-docker
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: npm-parser-service-docker
+  template:
+    metadata:
+      labels:
+        app: npm-parser-service-docker
+    spec:
+      containers:
+        - name: npm-parser-service-docker
+          image: alimainfraspeak/npm-parser-service-docker:latest
+          imagePullPolicy: Always
+          env:
+            - name: REDIS_HOST
+              valueFrom:
+                secretKeyRef:
+                  name: queue-secrets
+                  key: REDIS_HOST
+            - name: "REDIS_PORT"
+              value: "6379"
