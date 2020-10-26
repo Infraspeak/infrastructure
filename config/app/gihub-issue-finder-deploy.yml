@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: github-issue-finder-service-docker
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: github-issue-finder-service-docker
+  template:
+    metadata:
+      labels:
+        app: github-issue-finder-service-docker
+    spec:
+      containers:
+        - name: github-issue-finder-service-docker
+          image: alimainfraspeak/github-issue-finder-service-docker
+          workingDir: /var/www/html/src
+          command: [ "php artisan " ]
+          env:
+            - name: QUEUE_CONNECTION
+              value: redis
+            - name: REDIS_HOST
+              valueFrom:
+                secretKeyRef:
+                  name: queue-secrets
+                  key: REDIS_HOST
+            - name: REDIS_PREFIX
+              valueFrom:
+                secretKeyRef:
+                  name: queue-secrets
+                  key: REDIS_PREFIX
